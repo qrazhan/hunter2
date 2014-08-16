@@ -1,0 +1,21 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.qrazhan.hunter2.activities.HuntActivity$PlaceholderFragment">
+
+    <ProgressBar
+        android:id="@+id/web_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        style="@android:style/Widget.Holo.Light.ProgressBar.Large"/>
+
+    <WebView
+        android:id="@+id/hunt_webview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone"/>
+
+</FrameLayout>

@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginLeft="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="5dp">
+
+    <!-- Use same ID to use built-in features -->
+    <!--<TextView
+        android:id="@+id/card_main_inner_simple_title"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>-->
+    <TextView
+        android:id="@+id/hunt_upvotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/darkOrange"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/hunt_num_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/darkOrange"/>
+
+    <TextView
+        android:id="@+id/hunt_maker_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/green"
+        android:textStyle="bold"/>
+
+</LinearLayout>

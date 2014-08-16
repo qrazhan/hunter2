@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.qrazhan.hunter2.activities.HuntActivity" >
+
+    <item android:id="@+id/action_browser"
+        android:title="Open in Browser"
+        android:icon="@drawable/ic_action_web_site"
+        android:showAsAction="always"
+        />
+
+    <item android:id="@+id/action_share"
+        android:title="Share"
+        android:showAsAction="always"
+        android:icon="@drawable/ic_action_share" />
+
+    <!--<item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never" />-->
+</menu>
