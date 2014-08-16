@@ -1,12 +1,17 @@
 package com.qrazhan.hunter2.activities;
 
 import android.app.ActionBar;
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.DatePicker;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -16,10 +21,12 @@ import com.qrazhan.hunter2.Constants;
 import com.qrazhan.hunter2.activities.fragments.NavigationDrawerFragment;
 import com.qrazhan.hunter2.R;
 
+import java.util.Calendar;
+
 import roboguice.activity.RoboFragmentActivity;
 
 
-public class MainActivity extends RoboFragmentActivity
+public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -31,7 +38,8 @@ public class MainActivity extends RoboFragmentActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-    private Fragment mFragment;
+    private BrowsingFragment browsingFragment;
+    private String dateString="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +70,7 @@ public class MainActivity extends RoboFragmentActivity
                         if(result != null && result.has("access_token")) {
                             Constants.CLIENT_TOKEN = result.get("access_token").getAsString();
                             Constants.TOKEN_EXPIRES = System.currentTimeMillis() + ((long)result.get("expires_in").getAsInt())*1000l;
-                            ((BrowsingFragment) mFragment).refresh(getApplicationContext());
+                            browsingFragment.refresh(getApplicationContext());
                         }
                     }
                 });
@@ -73,9 +81,9 @@ public class MainActivity extends RoboFragmentActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
-        mFragment = BrowsingFragment.newInstance();
+        browsingFragment = BrowsingFragment.newInstance(dateString);
         fragmentManager.beginTransaction()
-                .replace(R.id.container, mFragment)
+                .replace(R.id.container, browsingFragment)
                 .commit();
     }
 
@@ -108,11 +116,42 @@ public class MainActivity extends RoboFragmentActivity
         int id = item.getItemId();
         switch(id){
             case R.id.action_refresh:
-                ((BrowsingFragment) mFragment).refresh(getApplicationContext());
+                browsingFragment.refresh(getApplicationContext());
+                break;
+            case R.id.action_pick_day:
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getFragmentManager(), "datePicker");
                 break;
 
         }
         return super.onOptionsItemSelected(item);
     }
 
+
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            // Do something with the date chosen by the user
+            String dateString;
+            dateString = year+"-";
+            dateString += (month < 10 ? "0"+month : month)+"-";
+            dateString += (day < 10 ? "0"+day : day)+"";
+            ((MainActivity) getActivity()).browsingFragment.dateString = dateString;
+            ((MainActivity) getActivity()).dateString = dateString;
+            ((MainActivity) getActivity()).browsingFragment.refresh(getActivity().getApplicationContext());
+        }
+    }
 }

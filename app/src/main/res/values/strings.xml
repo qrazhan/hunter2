@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">hunter2</string>
-    <string name="title_section1">Profile</string>
+    <string name="title_section1">Browse</string>
     <string name="title_section2">Settings</string>
     <string name="title_section3">Logout</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

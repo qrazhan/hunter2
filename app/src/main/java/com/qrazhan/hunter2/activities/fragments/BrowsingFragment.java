@@ -28,8 +28,11 @@ import it.gmariotti.cardslib.library.view.CardListView;
 
 public class BrowsingFragment extends Fragment {
 
-    public static BrowsingFragment newInstance() {
+    public String dateString;
+
+    public static BrowsingFragment newInstance(String dateString) {
         BrowsingFragment fragment = new BrowsingFragment();
+        fragment.dateString = dateString;
         return fragment;
     }
 
@@ -61,7 +64,7 @@ public class BrowsingFragment extends Fragment {
         bar.setIndeterminate(true);
 
         Ion.with(context)
-                .load("https://api.producthunt.com/v1/posts")
+                .load("https://api.producthunt.com/v1/posts?day="+dateString)
                 .setHeader("Authorization", "Bearer "+ Constants.CLIENT_TOKEN)
                 .setLogging("Ion", Log.DEBUG)
                 .asJsonObject()

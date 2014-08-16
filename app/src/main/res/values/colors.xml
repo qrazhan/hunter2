@@ -3,4 +3,5 @@
     <color name="darkOrange">#da552f</color>
     <color name="green">#51ac7d</color>
     <color name="card_pressed">#7Eda552f</color>
+    <color name="gray">#ccc</color>
 </resources>
