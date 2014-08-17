@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
- * Created by dick on 8/14/14.
+ * Created by prashan on 8/14/14.
  */
 public class CommentView extends FrameLayout {
 

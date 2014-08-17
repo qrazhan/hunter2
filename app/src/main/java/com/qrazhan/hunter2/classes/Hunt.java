@@ -25,8 +25,11 @@ public class Hunt implements Parcelable {
     public String url;
     public boolean makerJoined;
     public int numComments;
+    public String imgUrl;
+    public String smallImgUrl;
 
-    public Hunt(int id, int upvotes, String title, String subtitle, String permlink, String url, boolean makerJoined, int numComments){
+    public Hunt(int id, int upvotes, String title, String subtitle, String permlink, String url,
+                boolean makerJoined, int numComments, String imgUrl, String smallImgUrl){
         this.id = id;
         this.upvotes = upvotes;
         this.title = title;
@@ -35,6 +38,8 @@ public class Hunt implements Parcelable {
         this.url = url;
         this.makerJoined = makerJoined;
         this.numComments = numComments;
+        this.imgUrl = imgUrl;
+        this.smallImgUrl = smallImgUrl;
     }
 
     public Hunt(JsonObject obj){
@@ -45,7 +50,9 @@ public class Hunt implements Parcelable {
                 obj.get("discussion_url").getAsString(),
                 obj.get("redirect_url").getAsString(),
                 obj.get("maker_inside").getAsBoolean(),
-                obj.get("comments_count").getAsInt());
+                obj.get("comments_count").getAsInt(),
+                obj.get("screenshot_url").getAsJsonObject().get("850px").getAsString(),
+                obj.get("screenshot_url").getAsJsonObject().get("300px").getAsString());
     }
 
     public Hunt(Parcel parcel){

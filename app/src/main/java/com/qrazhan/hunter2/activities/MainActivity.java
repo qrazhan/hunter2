@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.FragmentManager;
 import android.util.Log;
@@ -88,10 +89,15 @@ public class MainActivity extends Activity
                     fragmentManager.beginTransaction()
                         .replace(R.id.container, browsingFragment)
                         .commit();
+
+                    currPosition = position;
+                    break;
+                case 1:
+                    Intent i = new Intent(this, SettingsActivity.class);
+                    startActivity(i);
                     break;
             }
 
-            currPosition = position;
 
 
         }

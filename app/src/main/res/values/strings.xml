@@ -13,4 +13,6 @@
     <string name="title_activity_hunt">HuntActivity</string>
     <string name="hello_world">Hello world!</string>
 
+    <string name="settings_small_card_key">small_card_view</string>
+    <string name="settings_low_res_key">low_res_images</string>
 </resources>

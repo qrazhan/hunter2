@@ -19,9 +19,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:parentActivityName=".activities.MainActivity"
             android:name=".activities.HuntActivity"
-            android:label="@string/title_activity_hunt" >
+            android:label="@string/title_activity_hunt"
+            android:parentActivityName=".activities.MainActivity" >
+        </activity>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.qrazhan.hunter2.activities.MainActivity" />
         </activity>
     </application>
 

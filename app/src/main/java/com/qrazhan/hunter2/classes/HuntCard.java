@@ -1,17 +1,21 @@
 package com.qrazhan.hunter2.classes;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.koushikdutta.ion.Ion;
 import com.qrazhan.hunter2.R;
 
 import it.gmariotti.cardslib.library.internal.Card;
 
 /**
- * Created by dick on 8/9/14.
+ * Created by prashan on 8/9/14.
  */
 public class HuntCard extends Card {
 
@@ -54,7 +58,23 @@ public class HuntCard extends Card {
         TextView upvotes = (TextView) parent.findViewById(R.id.hunt_upvotes);
         TextView numComments = (TextView) parent.findViewById(R.id.hunt_num_comments);
         TextView maker = (TextView) parent.findViewById(R.id.hunt_maker_in);
+        ImageView preview = (ImageView) parent.findViewById(R.id.hunt_preview_img);
 
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        if(preview != null){
+            if(!sharedPref.getBoolean(getContext().getString(R.string.settings_small_card_key), false)) {
+                if(!sharedPref.getBoolean(getContext().getString(R.string.settings_low_res_key), false)) {
+                    Ion.with(preview)
+                            .load(hunt.imgUrl);
+                } else {
+                    Ion.with(preview)
+                            .load(hunt.smallImgUrl);
+                }
+            } else {
+                preview.setVisibility(View.GONE);
+            }
+        }
         if(upvotes != null)
             upvotes.setText(hunt.upvotes+" points");
         if(numComments != null)

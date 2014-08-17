@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:key="@string/settings_small_card_key"
+        android:title="Small Card Views"
+        android:summary="Shows hunts without images"
+        android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="@string/settings_low_res_key"
+        android:title="Low Res Images"
+        android:summary="Load lower resolution preview images"
+        android:defaultValue="false" />
+
+</PreferenceScreen>
