@@ -30,7 +30,6 @@
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_hunter2</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Hunter2</item>
         <item name="android:activatedBackgroundIndicator">@drawable/activated_background_hunter2</item>
-        
     </style>
 
     <style name="ActionBar.Solid.Hunter2" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">

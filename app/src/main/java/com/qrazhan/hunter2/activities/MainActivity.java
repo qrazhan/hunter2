@@ -8,6 +8,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.app.FragmentManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
@@ -140,18 +141,28 @@ public class MainActivity extends Activity
             int day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
+            DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
+            dialog.setTitle("View products posted on...");
+            return dialog;
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
+            month++;    //what the fuck android? why only index months at 0????
             String dateString;
             dateString = year+"-";
             dateString += (month < 10 ? "0"+month : month)+"-";
             dateString += (day < 10 ? "0"+day : day)+"";
-            ((MainActivity) getActivity()).browsingFragment.dateString = dateString;
-            ((MainActivity) getActivity()).dateString = dateString;
-            ((MainActivity) getActivity()).browsingFragment.refresh(getActivity().getApplicationContext());
+            MainActivity activity = ((MainActivity) getActivity());
+            activity.browsingFragment.dateString = dateString;
+            activity.dateString = dateString;
+            activity.browsingFragment.refresh(activity.getApplicationContext());
+            final Calendar c = Calendar.getInstance();
+            if(year == c.get(Calendar.YEAR) && month-1 == c.get(Calendar.MONTH) && day == c.get(Calendar.DAY_OF_MONTH)){
+                activity.getActionBar().setTitle("Today's Hunts");
+            } else {
+                activity.getActionBar().setTitle("Hunts for "+month+"/"+day);
+            }
         }
     }
 }
