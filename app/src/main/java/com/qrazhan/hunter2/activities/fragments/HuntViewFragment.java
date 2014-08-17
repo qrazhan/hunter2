@@ -14,7 +14,16 @@ import android.widget.ProgressBar;
 import com.qrazhan.hunter2.R;
 import com.qrazhan.hunter2.classes.Hunt;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class HuntViewFragment extends Fragment {
+
+    @InjectView(R.id.web_progress)
+    ProgressBar bar;
+
+    @InjectView(R.id.hunt_webview)
+    WebView web;
 
     private Hunt hunt;
 
@@ -35,16 +44,15 @@ public class HuntViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_hunt, container, false);
+        View view = inflater.inflate(R.layout.fragment_hunt, container, false);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        WebView web = (WebView) getView().findViewById(R.id.hunt_webview);
-        final ProgressBar bar = (ProgressBar) getView().findViewById(R.id.web_progress);
         bar.setIndeterminate(true);
         bar.setVisibility(View.VISIBLE);
-        Log.w("webView", hunt.url);
         web.getSettings().setJavaScriptEnabled(true);
         web.loadUrl(hunt.url);
         web.setWebViewClient(new WebViewClient() {

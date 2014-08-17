@@ -24,8 +24,6 @@ import com.qrazhan.hunter2.R;
 
 import java.util.Calendar;
 
-import roboguice.activity.RoboFragmentActivity;
-
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -41,6 +39,7 @@ public class MainActivity extends Activity
     private CharSequence mTitle;
     private BrowsingFragment browsingFragment;
     private String dateString="";
+    private int currPosition = -1;  //initialize to -1 so that the first call to onNavigationDrawerItemSelected() goes through
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +80,21 @@ public class MainActivity extends Activity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        FragmentManager fragmentManager = getFragmentManager();
-        browsingFragment = BrowsingFragment.newInstance(dateString);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, browsingFragment)
-                .commit();
+        if(position != currPosition) {
+            FragmentManager fragmentManager = getFragmentManager();
+            switch(position){
+                case 0:
+                    browsingFragment = BrowsingFragment.newInstance(dateString);
+                    fragmentManager.beginTransaction()
+                        .replace(R.id.container, browsingFragment)
+                        .commit();
+                    break;
+            }
+
+            currPosition = position;
+
+
+        }
     }
 
     public void restoreActionBar() {

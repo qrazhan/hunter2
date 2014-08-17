@@ -24,7 +24,7 @@ dependencies {
     // You must install or update the Support Repository through the SDK manager to use this dependency.
     // You must install or update the Support Repository through the SDK manager to use this dependency.
     compile 'com.android.support:support-v4:19.+'
-    compile 'org.roboguice:roboguice:2.0'
+    compile 'com.jakewharton:butterknife:5.1.2'
     compile 'com.github.gabrielemariotti.cards:library:1.8.0'
     compile 'com.koushikdutta.ion:ion:1.+'
     // You must install or update the Support Repository through the SDK manager to use this dependency.

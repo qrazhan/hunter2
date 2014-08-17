@@ -4,17 +4,35 @@ import android.app.Activity;
 import android.content.Context;
 import android.text.Html;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.koushikdutta.ion.Ion;
 import com.qrazhan.hunter2.R;
 import com.qrazhan.hunter2.classes.Comment;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by dick on 8/14/14.
  */
 public class CommentView extends FrameLayout {
+
+    @InjectView(R.id.comment_author)
+    TextView author;
+    @InjectView(R.id.comment_username)
+    TextView username;
+    @InjectView(R.id.comment_maker)
+    TextView maker;
+    @InjectView(R.id.comment_body)
+    TextView body;
+    @InjectView(R.id.comment_user_pic)
+    ImageView pic;
 
     public Comment comment;
 
@@ -34,14 +52,15 @@ public class CommentView extends FrameLayout {
     }
 
     public void populateLayout(Activity activity){
-        activity.getLayoutInflater().inflate( R.layout.comment, this);
-        TextView author = (TextView) findViewById(R.id.comment_author);
-        TextView username = (TextView) findViewById(R.id.comment_username);
-        TextView maker = (TextView) findViewById(R.id.comment_maker);
-        TextView body = (TextView) findViewById(R.id.comment_body);
+        View view = activity.getLayoutInflater().inflate( R.layout.comment, this);
+        ButterKnife.inject(this, view);
         author.setText(comment.author.name);
         username.setText("@"+comment.author.username+" - "+comment.author.headline);
         maker.setText(comment.maker ? "M" : "");
         body.setText(Html.fromHtml(comment.text));
+        Ion.with(pic)
+                .placeholder(R.drawable.ic_launcher)
+                .error(R.drawable.ic_launcher)
+                .load(comment.author.imgUrl);
     }
 }

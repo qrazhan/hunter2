@@ -21,6 +21,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +32,9 @@ import java.util.Set;
  *
  */
 public class CommentsFragment extends Fragment {
+
+    @InjectView(R.id.comment_root)
+    LinearLayout rootLayout;
 
     private ArrayList<Integer> added = new ArrayList<Integer>();
 
@@ -50,7 +56,9 @@ public class CommentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_comments, container, false);
+        View view = inflater.inflate(R.layout.fragment_comments, container, false);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     @Override
@@ -63,8 +71,6 @@ public class CommentsFragment extends Fragment {
     public void addCommentViews(){
         Log.w("Comments", "addViews called");
         HuntActivity activity = (HuntActivity) getActivity();
-        //Collection<Comment> comments = activity.commentsMap.values();
-        LinearLayout rootLayout = (LinearLayout) getView().findViewById(R.id.comment_root);
         List<Integer> ids = new ArrayList<Integer>();
         ids.addAll(activity.commentsMap.keySet());
         Collections.sort(ids);

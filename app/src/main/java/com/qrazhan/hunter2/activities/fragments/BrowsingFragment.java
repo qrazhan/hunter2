@@ -22,11 +22,19 @@ import com.qrazhan.hunter2.classes.Hunt;
 import java.util.ArrayList;
 import java.util.concurrent.TimeoutException;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
 
 public class BrowsingFragment extends Fragment {
+
+    @InjectView(R.id.browsing_progress)
+    ProgressBar bar;
+
+    @InjectView(R.id.testcard)
+    CardListView cardListView;
 
     public String dateString;
 
@@ -47,18 +55,12 @@ public class BrowsingFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_browsing, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-//        Context context = getActivity().getApplicationContext();
-//        refresh(context);
+        View view = inflater.inflate(R.layout.fragment_browsing, container, false);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     public void refresh(final Context context){
-        final ProgressBar bar = (ProgressBar) getView().findViewById(R.id.browsing_progress);
-        final CardListView cardListView = (CardListView) getView().findViewById(R.id.testcard);
         cardListView.setVisibility(View.GONE);
         bar.setVisibility(View.VISIBLE);
         bar.setIndeterminate(true);
