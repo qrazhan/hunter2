@@ -80,7 +80,7 @@ public class BrowsingFragment extends Fragment {
                             return;
                         }
 
-                        if(result != null) {
+                        if(result != null && result.has("posts")) {
                             bar.setVisibility(View.GONE);
                             JsonArray hunts = result.getAsJsonArray("posts");
                             ArrayList<Card> cards = new ArrayList<Card>();

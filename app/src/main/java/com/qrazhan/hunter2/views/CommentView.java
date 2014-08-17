@@ -2,6 +2,8 @@ package com.qrazhan.hunter2.views;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -58,9 +60,17 @@ public class CommentView extends FrameLayout {
         username.setText("@"+comment.author.username+" - "+comment.author.headline);
         maker.setText(comment.maker ? "M" : "");
         body.setText(Html.fromHtml(comment.text));
-        Ion.with(pic)
-                .placeholder(R.drawable.ic_launcher)
-                .error(R.drawable.ic_launcher)
-                .load(comment.author.imgUrl);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        if(!sharedPref.getBoolean(getContext().getString(R.string.settings_low_res_key), false)) {
+            Ion.with(pic)
+                    .error(R.drawable.ic_launcher)
+                    .load(comment.author.imgUrl);
+        } else {
+            Ion.with(pic)
+                    .error(R.drawable.ic_launcher)
+                    .load(comment.author.smallImgUrl);
+        }
     }
 }

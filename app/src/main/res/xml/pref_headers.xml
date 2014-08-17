@@ -4,14 +4,6 @@
 
     <header
         android:fragment="com.qrazhan.hunter2.activities.SettingsActivity$GeneralPreferenceFragment"
-        android:title="@string/pref_header_general" />
-
-    <header
-        android:fragment="com.qrazhan.hunter2.activities.SettingsActivity$NotificationPreferenceFragment"
-        android:title="@string/pref_header_notifications" />
-
-    <header
-        android:fragment="com.qrazhan.hunter2.activities.SettingsActivity$DataSyncPreferenceFragment"
-        android:title="@string/pref_header_data_sync" />
+        android:title="Display Options" />
 
 </preference-headers>

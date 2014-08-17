@@ -12,13 +12,15 @@ public class User {
     public String headline;
     public String username;
     public String imgUrl;
+    public String smallImgUrl;
 
-    public User(int id, String name, String headline, String username, String imgUrl){
+    public User(int id, String name, String headline, String username, String imgUrl, String smallImgUrl){
         this.id = id;
         this.name = name;
         this.headline = headline;
         this.username = username;
         this.imgUrl = imgUrl;
+        this.smallImgUrl = smallImgUrl;
     }
 
     public User(JsonObject json){
@@ -26,6 +28,7 @@ public class User {
                 json.get("name").isJsonNull() ? "" : json.get("name").getAsString(),
                 json.get("headline").isJsonNull() ? "" : json.get("headline").getAsString(),
                 json.get("username").getAsString(),
-                json.get("image_url").getAsJsonObject().get("73px").getAsString());
+                json.get("image_url").getAsJsonObject().get("73px").getAsString(),
+                json.get("image_url").getAsJsonObject().get("48px").getAsString());
     }
 }
