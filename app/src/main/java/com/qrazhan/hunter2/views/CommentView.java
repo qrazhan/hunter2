@@ -1,5 +1,6 @@
 package com.qrazhan.hunter2.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.Html;
 import android.util.AttributeSet;
@@ -32,8 +33,8 @@ public class CommentView extends FrameLayout {
         this.comment = comment;
     }
 
-    public void populateLayout(){
-        inflate(getContext(), R.layout.comment, this);
+    public void populateLayout(Activity activity){
+        activity.getLayoutInflater().inflate( R.layout.comment, this);
         TextView author = (TextView) findViewById(R.id.comment_author);
         TextView username = (TextView) findViewById(R.id.comment_username);
         TextView maker = (TextView) findViewById(R.id.comment_maker);

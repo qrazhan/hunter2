@@ -2,7 +2,9 @@ package com.qrazhan.hunter2.activities;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -106,11 +108,8 @@ public class HuntActivity extends Activity implements ActionBar.TabListener {
                     public void onCompleted(Exception e, JsonObject result) {
                         if(result != null && result.has("comments")) {
                             JsonArray comments = result.get("comments").getAsJsonArray();
-                            for (int i = 0; i < comments.size(); i++) {
-                                JsonObject obj = comments.get(i).getAsJsonObject();
-                                Comment comment = new Comment(obj);
-                                commentsMap.put(comment.id, comment);
-                            }
+
+                            addCommentsToMap(comments);
 
                             commentsLoaded = true;
                             commentsFragment.addCommentViews();
@@ -119,6 +118,17 @@ public class HuntActivity extends Activity implements ActionBar.TabListener {
                 });
     }
 
+    public void addCommentsToMap(JsonArray comments){
+        for (int i = 0; i < comments.size(); i++) {
+            JsonObject obj = comments.get(i).getAsJsonObject();
+            Comment comment = new Comment(obj);
+            if(!commentsMap.containsKey(comment.id)) {
+                commentsMap.put(comment.id, comment);
+                addCommentsToMap(obj.getAsJsonArray("child_comments"));
+            }
+
+        }
+    }
 
     public int getCommentChildLevel(Comment comment){
         int level = 0;
@@ -130,11 +140,13 @@ public class HuntActivity extends Activity implements ActionBar.TabListener {
     }
 
     public ArrayList<Comment> getCommentChildren(Comment comment){
-        Collection<Comment> comments = commentsMap.values();
+        List<Integer> ids = new ArrayList<Integer>();
+        ids.addAll(commentsMap.keySet());
+        Collections.sort(ids);
         ArrayList<Comment> toRet = new ArrayList<Comment>();
-        for(Comment c : comments){
-            if(c.parent == comment.id){
-                toRet.add(c);
+        for(int i : ids){
+            if(commentsMap.get(i).parent == comment.id){
+                toRet.add(commentsMap.get(i));
             }
         }
         return toRet;

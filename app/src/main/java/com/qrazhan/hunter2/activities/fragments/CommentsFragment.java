@@ -17,6 +17,9 @@ import com.qrazhan.hunter2.views.CommentView;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -26,6 +29,8 @@ import java.util.Collection;
  *
  */
 public class CommentsFragment extends Fragment {
+
+    private ArrayList<Integer> added = new ArrayList<Integer>();
 
     public static CommentsFragment newInstance() {
         CommentsFragment fragment = new CommentsFragment();
@@ -58,30 +63,37 @@ public class CommentsFragment extends Fragment {
     public void addCommentViews(){
         Log.w("Comments", "addViews called");
         HuntActivity activity = (HuntActivity) getActivity();
-        ArrayList<Integer> added = new ArrayList<Integer>();
-        Collection<Comment> comments = activity.commentsMap.values();
+        //Collection<Comment> comments = activity.commentsMap.values();
         LinearLayout rootLayout = (LinearLayout) getView().findViewById(R.id.comment_root);
-        for(Comment comment : comments){
-            addCommentView(comment, activity, rootLayout, 0);
+        List<Integer> ids = new ArrayList<Integer>();
+        ids.addAll(activity.commentsMap.keySet());
+        Collections.sort(ids);
+        for(int i : ids){
+            if(activity.commentsMap.get(i).parent == -1) {
+                addCommentView(activity.commentsMap.get(i), activity, rootLayout, 0);
+            }
         }
         rootLayout.invalidate();
     }
 
     public void addCommentView(Comment comment, HuntActivity activity, LinearLayout rootLayout, int indent){
-        CommentView view = new CommentView(activity.getApplicationContext(), comment);
-        //Log.w("Comments", indent+"");
+        if(!added.contains(comment.id)) {
+            CommentView view = new CommentView(activity.getApplicationContext(), comment);
+            //Log.w("Comments", indent+"");
 
-        view.populateLayout();
-        rootLayout.addView(view);
+            view.populateLayout(activity);
+            rootLayout.addView(view);
+            added.add(comment.id);
 
-        LinearLayout.MarginLayoutParams params = (LinearLayout.MarginLayoutParams) view.getLayoutParams();
-        params.setMargins(indent*50, 0, 0, 0); //substitute parameters for left, top, right, bottom
-        view.setLayoutParams(params);
+            LinearLayout.MarginLayoutParams params = (LinearLayout.MarginLayoutParams) view.getLayoutParams();
+            params.setMargins(indent * 50, 0, 0, 0); //substitute parameters for left, top, right, bottom
+            view.setLayoutParams(params);
 
 
-        ArrayList<Comment> children = activity.getCommentChildren(comment);
-        for(Comment child : children){
-            addCommentView(child, activity, rootLayout, indent+1);
+            ArrayList<Comment> children = activity.getCommentChildren(comment);
+            for (Comment child : children) {
+                addCommentView(child, activity, rootLayout, indent + 1);
+            }
         }
     }
 }
