@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -171,12 +172,19 @@ public class HuntActivity extends Activity implements ActionBar.TabListener {
                 openInBrowser.setData(Uri.parse(hunt.url));
                 startActivity(openInBrowser);
                 break;
-            case R.id.action_share:
+            case R.id.action_share_link:
                 Intent i = new Intent();
                 i.setAction(Intent.ACTION_SEND);
                 i.putExtra(Intent.EXTRA_TEXT, hunt.url+" via hunter2 for Android");
                 i.setType("text/plain");
                 startActivity(i);
+                break;
+            case R.id.action_share_post:
+                Intent j = new Intent();
+                j.setAction(Intent.ACTION_SEND);
+                j.putExtra(Intent.EXTRA_TEXT, hunt.permlink+" via hunter2 for Android");
+                j.setType("text/plain");
+                startActivity(j);
                 break;
         }
         return super.onOptionsItemSelected(item);

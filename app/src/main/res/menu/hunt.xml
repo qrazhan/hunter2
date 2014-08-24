@@ -8,13 +8,11 @@
         android:showAsAction="always"
         />
 
-    <item android:id="@+id/action_share"
-        android:title="Share"
-        android:showAsAction="always"
-        android:icon="@drawable/ic_action_share" />
+    <item android:id="@+id/action_share_link"
+        android:title="Share Link"
+        android:showAsAction="never" />
 
-    <!--<item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never" />-->
+    <item android:id="@+id/action_share_post"
+        android:title="Share Post"
+        android:showAsAction="never" />
 </menu>

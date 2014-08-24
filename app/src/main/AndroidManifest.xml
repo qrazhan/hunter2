@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.qrazhan.hunter2" >
+    package="com.qrazhan.hunter2"
+    android:versionCode="2"
+    android:versionName="1.1">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -21,6 +23,7 @@
         <activity
             android:name=".activities.HuntActivity"
             android:label="@string/title_activity_hunt"
+            android:theme="@style/Theme.Hunter2.ShareOverflow"
             android:parentActivityName=".activities.MainActivity" >
         </activity>
         <activity

@@ -32,6 +32,14 @@
         <item name="android:activatedBackgroundIndicator">@drawable/activated_background_hunter2</item>
     </style>
 
+    <style name="Theme.Hunter2.ShareOverflow" parent="@style/Theme.Hunter2">
+        <item name="android:actionOverflowButtonStyle">@style/ShareActionButtonOverflow</item>
+    </style>
+
+    <style name="ShareActionButtonOverflow" parent="@android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_action_share</item>
+    </style>
+
     <style name="ActionBar.Solid.Hunter2" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
         <item name="android:background">@drawable/ab_solid_hunter2</item>
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_hunter2</item>
