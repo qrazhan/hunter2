@@ -168,7 +168,13 @@ public class MainActivity extends Activity
                         SimpleDateFormat format = new SimpleDateFormat(
                                 "yyyy-MM-dd");
                         Date selected = calendarPickerView.getSelectedDate();
-                        if(selected.equals(currDate)){
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(selected);
+                        Calendar current = Calendar.getInstance();
+                        current.setTime(currDate);
+                        if(calendar.get(Calendar.MONTH) == current.get(Calendar.MONTH)
+                                && calendar.get(Calendar.DAY_OF_MONTH) == current.get(Calendar.DAY_OF_MONTH)
+                                && calendar.get(Calendar.YEAR) == current.get(Calendar.YEAR)){
                             dialog.dismiss();
                             return;
                         }
@@ -177,9 +183,6 @@ public class MainActivity extends Activity
                         browsingFragment.dateString = dateString;
                         MainActivity.this.dateString = dateString;
                         browsingFragment.refresh(getApplicationContext());
-
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.setTime(selected);
 
                         if(today.equals(selected)){
                             getActionBar().setTitle("Today's Hunts");
