@@ -69,7 +69,6 @@ public class CommentsFragment extends Fragment {
     }
 
     public void addCommentViews(){
-        Log.w("Comments", "addViews called");
         HuntActivity activity = (HuntActivity) getActivity();
         List<Integer> ids = new ArrayList<Integer>();
         ids.addAll(activity.commentsMap.keySet());

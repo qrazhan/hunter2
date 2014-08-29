@@ -17,7 +17,6 @@ import android.net.Uri;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,13 +25,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-import com.qrazhan.hunter2.activities.fragments.BrowsingFragment;
 import com.qrazhan.hunter2.Constants;
 import com.qrazhan.hunter2.activities.fragments.CommentsFragment;
 import com.qrazhan.hunter2.activities.fragments.HuntViewFragment;
 import com.qrazhan.hunter2.R;
+import com.qrazhan.hunter2.activities.fragments.RelatedLinksFragment;
 import com.qrazhan.hunter2.classes.Comment;
 import com.qrazhan.hunter2.classes.Hunt;
+import com.qrazhan.hunter2.classes.RelatedLink;
 
 public class HuntActivity extends Activity implements ActionBar.TabListener {
 
@@ -52,9 +52,12 @@ public class HuntActivity extends Activity implements ActionBar.TabListener {
     ViewPager mViewPager;
     public Hunt hunt;
     public HashMap<Integer, Comment> commentsMap = new HashMap<Integer, Comment>();
+    public ArrayList<RelatedLink> relatedLinks = new ArrayList<RelatedLink>();
     private HuntViewFragment viewFragment;
     private CommentsFragment commentsFragment;
+    private RelatedLinksFragment linksFragment;
     public boolean commentsLoaded = false;
+    public boolean linksLoaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,20 +103,35 @@ public class HuntActivity extends Activity implements ActionBar.TabListener {
         }
 
         Ion.with(getApplicationContext())
-                .load("https://api.producthunt.com/v1/posts/"+hunt.id+"/comments")
+                .load("https://api.producthunt.com/v1/posts/"+hunt.id)
                 .setHeader("Authorization", "Bearer "+ Constants.CLIENT_TOKEN)
                 .setLogging("Ion", Log.DEBUG)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-                        if(result != null && result.has("comments")) {
+                        Log.w("links", result.toString());
+                        if(result == null || !result.has("post"))
+                            return;
+                        result = result.get("post").getAsJsonObject();
+                        if(result.has("comments")) {
                             JsonArray comments = result.get("comments").getAsJsonArray();
-
                             addCommentsToMap(comments);
-
                             commentsLoaded = true;
-                            commentsFragment.addCommentViews();
+                            if(commentsFragment != null)
+                                commentsFragment.addCommentViews();
+                        }
+                        if(result.has("related_links")){
+                            JsonArray links = result.get("related_links").getAsJsonArray();
+                            for(int i=0; i < links.size(); i++){
+                                JsonObject obj = links.get(i).getAsJsonObject();
+                                Log.w("links", obj.toString());
+                                RelatedLink link = new RelatedLink(obj);
+                                relatedLinks.add(link);
+                            }
+                            linksLoaded = true;
+                            if(linksFragment != null)
+                                linksFragment.addCards();
                         }
                     }
                 });
@@ -219,7 +237,6 @@ public class HuntActivity extends Activity implements ActionBar.TabListener {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            Fragment fragment;
             switch(position){
                 case 0:
                     viewFragment = HuntViewFragment.newInstance(hunt);
@@ -227,6 +244,9 @@ public class HuntActivity extends Activity implements ActionBar.TabListener {
                 case 1:
                     commentsFragment = CommentsFragment.newInstance();
                     return commentsFragment;
+                case 2:
+                    linksFragment = RelatedLinksFragment.newInstance();
+                    return linksFragment;
             }
             return null;
         }
@@ -234,7 +254,7 @@ public class HuntActivity extends Activity implements ActionBar.TabListener {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 2;
+            return 3;
         }
 
         @Override
@@ -242,9 +262,11 @@ public class HuntActivity extends Activity implements ActionBar.TabListener {
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return "Hunt".toUpperCase(l);
+                    return "HUNT";
                 case 1:
-                    return "Comments".toUpperCase(l);
+                    return "COMMENTS";
+                case 2:
+                    return "LINKS";
             }
             return null;
         }

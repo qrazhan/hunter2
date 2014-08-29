@@ -37,20 +37,6 @@ public class HuntCard extends Card {
     public HuntCard(Context context, int innerLayout, Hunt hunt) {
         super(context, innerLayout);
         this.hunt = hunt;
-        init();
-    }
-
-    /**
-     * Init
-     */
-    private void init(){
-        //Set a OnClickListener listener
-        setOnClickListener(new OnCardClickListener() {
-            @Override
-            public void onClick(Card card, View view) {
-                Toast.makeText(getContext(), "Click Listener card=", Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     @Override

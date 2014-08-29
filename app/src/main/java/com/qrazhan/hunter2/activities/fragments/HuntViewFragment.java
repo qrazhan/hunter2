@@ -53,16 +53,18 @@ public class HuntViewFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         bar.setIndeterminate(true);
         bar.setVisibility(View.VISIBLE);
-        web.getSettings().setJavaScriptEnabled(true);
-        web.loadUrl(hunt.url);
-        web.setWebViewClient(new WebViewClient() {
+        if(hunt != null) {
+            web.getSettings().setJavaScriptEnabled(true);
+            web.loadUrl(hunt.url);
+            web.setWebViewClient(new WebViewClient() {
 
-            public void onPageFinished(WebView view, String url) {
-                // do your stuff here
-                view.setVisibility(View.VISIBLE);
-                bar.setVisibility(View.GONE);
-            }
-        });
+                public void onPageFinished(WebView view, String url) {
+                    // do your stuff here
+                    view.setVisibility(View.VISIBLE);
+                    bar.setVisibility(View.GONE);
+                }
+            });
+        }
     }
 
     @Override
