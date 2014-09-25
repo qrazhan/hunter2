@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.qrazhan.hunter2.R;
 import com.qrazhan.hunter2.activities.HuntActivity;
@@ -29,6 +31,12 @@ import it.gmariotti.cardslib.library.view.CardListView;
  *
  */
 public class RelatedLinksFragment extends Fragment {
+
+    @InjectView(R.id.browsing_links)
+    ProgressBar bar;
+
+    @InjectView(R.id.links_text)
+    TextView text;
 
     @InjectView(R.id.links_card_list)
     CardListView cardListView;
@@ -54,19 +62,27 @@ public class RelatedLinksFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         if(((HuntActivity) getActivity()).linksLoaded){
             addCards();
+        } else {
+            bar.setIndeterminate(true);
+            bar.setVisibility(View.VISIBLE);
         }
     }
 
     public void addCards(){
         Log.w("RelatedLinks", "addCards called");
+        bar.setVisibility(View.GONE);
         HuntActivity activity = (HuntActivity) getActivity();
         ArrayList<Card> cards = new ArrayList<Card>();
         for(RelatedLink link : activity.relatedLinks){
             cards.add(new RelatedLinkCard(activity.getApplicationContext(), link));
         }
-        CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), cards);
-        cardListView.setAdapter(mCardArrayAdapter);
-
+        if(cards.size()!=0) {
+            CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), cards);
+            cardListView.setAdapter(mCardArrayAdapter);
+            cardListView.setVisibility(View.GONE);
+        } else {
+            text.setVisibility(View.VISIBLE);
+        }
     }
 
 
