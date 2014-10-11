@@ -24,9 +24,9 @@ Features to be added (when the API opens up):
 
 More Screenshots:
 -----------------
-![](main.png =25x "Main Screen")
-![](hunt.png =25x "Viewing a Post")
-![](comments.png =25x "Reading Comments")
-![](links.png =25x "Related Links")
-![](nopics.png =25x "No Pictures")
+![](main.png "Main Screen")
+![](hunt.png "Viewing a Post")
+![](comments.png "Reading Comments")
+![](links.png "Related Links")
+![](nopics.png "No Pictures")
 
