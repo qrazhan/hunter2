@@ -74,12 +74,13 @@ public class RelatedLinksFragment extends Fragment {
         HuntActivity activity = (HuntActivity) getActivity();
         ArrayList<Card> cards = new ArrayList<Card>();
         for(RelatedLink link : activity.relatedLinks){
+            System.out.println(link.url);
             cards.add(new RelatedLinkCard(activity.getApplicationContext(), link));
         }
         if(cards.size()!=0) {
             CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), cards);
             cardListView.setAdapter(mCardArrayAdapter);
-            cardListView.setVisibility(View.GONE);
+            cardListView.setVisibility(View.VISIBLE);
         } else {
             text.setVisibility(View.VISIBLE);
         }

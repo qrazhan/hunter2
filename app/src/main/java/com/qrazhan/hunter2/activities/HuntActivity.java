@@ -184,6 +184,7 @@ public class HuntActivity extends Activity implements ActionBar.TabListener {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        System.out.println(id);
         switch (id){
             case R.id.action_browser:
                 Intent openInBrowser = new Intent(Intent.ACTION_VIEW);

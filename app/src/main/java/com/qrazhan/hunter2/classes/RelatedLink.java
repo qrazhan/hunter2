@@ -24,7 +24,7 @@ public class RelatedLink {
     public RelatedLink(JsonObject obj){
         this(obj.get("url").getAsString(),
                 obj.get("title").getAsString(),
-                obj.get("domain").getAsString(),
-                obj.get("favicon").getAsString());
+                obj.get("domain").getAsString(), !obj.get("favicon").isJsonNull() ?
+                obj.get("favicon").getAsString() : null);
     }
 }

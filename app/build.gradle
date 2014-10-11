@@ -8,8 +8,6 @@ android {
         applicationId "com.qrazhan.hunter2"
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 1
-        versionName "1.0"
     }
     buildTypes {
         release {

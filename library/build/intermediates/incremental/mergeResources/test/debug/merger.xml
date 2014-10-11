@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="debug" >
+        <source path="/Users/prashan/Documents/hunter2/library/build/intermediates/bundles/debug/res" >
+            <file
+                name="calendar_text_selector"
+                path="/Users/prashan/Documents/hunter2/library/build/intermediates/bundles/debug/res/color/calendar_text_selector.xml"
+                qualifiers=""
+                type="color" />
+            <file
+                name="calendar_bg_selector"
+                path="/Users/prashan/Documents/hunter2/library/build/intermediates/bundles/debug/res/drawable/calendar_bg_selector.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="month"
+                path="/Users/prashan/Documents/hunter2/library/build/intermediates/bundles/debug/res/layout/month.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="week"
+                path="/Users/prashan/Documents/hunter2/library/build/intermediates/bundles/debug/res/layout/week.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                path="/Users/prashan/Documents/hunter2/library/build/intermediates/bundles/debug/res/values/values.xml"
+                qualifiers="" >
+                <color name="calendar_inactive_month_bg" >#ffd7d9db
+                </color>
+                <color name="calendar_text_unselectable" >#7f778088
+                </color>
+
+                <style name="CalendarTitle" >
+                    <item name="android:textSize">
+@dimen/calendar_text_medium
+                    </item>
+                    <item name="android:textStyle">
+bold
+                    </item>
+                </style>
+
+                <color name="calendar_selected_range_bg" >#ff96caff
+                </color>
+
+                <string name="month_name_format" >MMMM yyyy
+                </string>
+
+                <color name="calendar_divider" >#ffbababa
+                </color>
+
+                <string name="invalid_date" >Date must be between %1$s and %2$s.
+                </string>
+
+                <color name="calendar_text_inactive" >#40778088
+                </color>
+
+                <dimen name="calendar_month_title_bottommargin" >4dp
+                </dimen>
+
+                <declare-styleable name="CalendarPickerView" >
+                    <attr name="android:background" />
+                    <attr
+                        name="dividerColor"
+                        format="color" />
+                    <attr
+                        name="dayBackground"
+                        format="reference" />
+                    <attr
+                        name="dayTextColor"
+                        format="color" />
+                    <attr
+                        name="titleTextColor"
+                        format="color" />
+                    <attr
+                        name="headerTextColor"
+                        format="color" />
+                </declare-styleable>
+
+                <color name="calendar_text_active" >#ff778088
+                </color>
+                <color name="calendar_bg" >#ffffffff
+                </color>
+
+                <dimen name="calendar_text_small" >14sp
+                </dimen>
+
+                <string name="day_name_format" >EEE
+                </string>
+
+                <style name="CalendarCell.DayHeader" >
+                    <item name="android:textSize">
+@dimen/calendar_text_small
+                    </item>
+                </style>
+
+                <dimen name="calendar_month_topmargin" >16dp
+                </dimen>
+
+                <color name="calendar_text_selected" >#ffffffff
+                </color>
+
+                <dimen name="calendar_day_headers_paddingbottom" >4dp
+                </dimen>
+
+                <style name="CalendarCell" >
+                    <item name="android:layout_width">
+0dp
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:gravity">
+center
+                    </item>
+                    <item name="android:textAlignment">
+center
+                    </item>
+                </style>
+
+                <color name="calendar_highlighted_day_bg" >#ccffcc
+                </color>
+
+                <style name="CalendarCell.CalendarDate" >
+                    <item name="android:textSize">
+@dimen/calendar_text_medium
+                    </item>
+                    <item name="android:clickable">
+true
+                    </item>
+                    <item name="android:textStyle">
+bold
+                    </item>
+                </style>
+
+                <color name="calendar_selected_day_bg" >#ff379bff
+                </color>
+                <color name="calendar_active_month_bg" >#fff5f7f9
+                </color>
+
+                <declare-styleable name="calendar_cell" >
+                    <attr
+                        name="state_selectable"
+                        format="boolean" />
+                    <attr
+                        name="state_current_month"
+                        format="boolean" />
+                    <attr
+                        name="state_today"
+                        format="boolean" />
+                    <attr
+                        name="state_range_first"
+                        format="boolean" />
+                    <attr
+                        name="state_range_middle"
+                        format="boolean" />
+                    <attr
+                        name="state_range_last"
+                        format="boolean" />
+                    <attr
+                        name="state_highlighted"
+                        format="boolean" />
+                </declare-styleable>
+
+                <dimen name="calendar_text_medium" >18sp
+                </dimen>
+            </file>
+            <file
+                path="/Users/prashan/Documents/hunter2/library/build/intermediates/bundles/debug/res/values-v9/values.xml"
+                qualifiers="v9" >
+                <string name="month_name_format" >LLLL yyyy
+                </string>
+            </file>
+        </source>
+    </dataSet>
+    <dataSet config="main" >
+        <source path="/Users/prashan/Documents/hunter2/library/src/androidTest/res" />
+        <source path="/Users/prashan/Documents/hunter2/library/build/generated/res/rs/test/debug" />
+        <source path="/Users/prashan/Documents/hunter2/library/build/generated/res/generated/test/debug" />
+    </dataSet>
+
+</merger>
