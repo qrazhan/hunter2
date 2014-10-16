@@ -2,6 +2,8 @@ package com.qrazhan.hunter2.activities.fragments;
 
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -75,7 +77,16 @@ public class RelatedLinksFragment extends Fragment {
         ArrayList<Card> cards = new ArrayList<Card>();
         for(RelatedLink link : activity.relatedLinks){
             System.out.println(link.url);
-            cards.add(new RelatedLinkCard(activity.getApplicationContext(), link));
+            final RelatedLinkCard card = new RelatedLinkCard(activity.getApplicationContext(), link);
+            card.setOnClickListener(new Card.OnCardClickListener() {
+                @Override
+                public void onClick(Card c, View view) {
+                    Intent openInBrowser = new Intent(Intent.ACTION_VIEW);
+                    openInBrowser.setData(Uri.parse(card.link.url));
+                    startActivity(openInBrowser);
+                }
+            });
+            cards.add(card);
         }
         if(cards.size()!=0) {
             CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), cards);
